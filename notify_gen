@@ -1,0 +1,16 @@
+#!/bin/sh
+
+# first parameter is the web url of your school's course directory, preferably in straight html
+# second parameter is the call number or the course number of the class you want to check on
+# third argument is the number of sections already known
+
+wget -qO- $1 | grep $2 | wc -l > svmii.txt
+
+if [ $(cat svmii.txt) -gt $3 ]
+then
+    say "new section woo hoo"
+else
+    say "fuk"
+fi
+
+rm -f svmii.txt
